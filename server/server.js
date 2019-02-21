@@ -4,7 +4,13 @@ const port = 5000;
 
 const faker = require('faker');
 
-app.get('/', (request, response) => {
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.get('/api', (request, response, next) => {
   
   const num = (isNaN(request.query.num)) ? 1 : +request.query.num;
   const dateParam = parseInt(request.query.fromDate);
