@@ -1,75 +1,46 @@
-// import React, { Component } from 'react';
-// import logo from './logo.svg';
-// import './App.css';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+import './App.css';
 
-// class App extends Component {
-//   render() {
-//     return (
-//       <div className="App">
-//         <header className="App-header">
-//           <img src={logo} className="App-logo" alt="logo" />
-//           <p>
-//             Edit <code>src/App.js</code> and save to reload.
-//           </p>
-//           <a
-//             className="App-link"
-//             href="https://reactjs.org"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             Learn React
-//           </a>
-//         </header>
-//       </div>
-//     );
-//   }
-// }
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div className="app">
+          <nav className="nav">
+            <ul className="nav__list">
 
-// export default App;
+              <li className="nav__item">
+                <Link to="/sale">SALE</Link>
+              </li>
 
+              <li className="nav__item">
+                <Link to="/rent">RENT</Link>
+              </li>
 
-import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+            </ul>
+          </nav>
+          
+          <hr />
 
-const BasicExample = () => (
-  <Router>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/topics">Topics</Link>
-        </li>
-      </ul>
+          <Route exact path="/" render={() => <Redirect to="/sale"/>} />
+          <Route path="/sale" component={Sale} />
+          <Route path="/rent" component={Rent} />
+        </div>
+      </Router>
+    );
+  }
+}
 
-      <hr />
-
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/topics" component={Topics} />
-    </div>
-  </Router>
-);
-
-const Home = () => (
+const Sale = () => (
   <div>
-    <h2>Home</h2>
+    <h2>Sale</h2>
   </div>
 );
 
-const About = () => (
+const Rent = ({ match }) => (
   <div>
-    <h2>About</h2>
-  </div>
-);
-
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
+    <h2>Rent</h2>
     <ul>
       <li>
         <Link to={`${match.url}/rendering`}>Rendering with React</Link>
@@ -97,4 +68,4 @@ const Topic = ({ match }) => (
   </div>
 );
 
-export default BasicExample;
+export default App;
