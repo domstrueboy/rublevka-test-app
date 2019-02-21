@@ -5,22 +5,40 @@ const port = 5000;
 const faker = require('faker');
 
 app.get('/', (request, response) => {
-    response.json({
+  
+  const num = (isNaN(request.query.num)) ? 1 : +request.query.num;
+  const dateParam = parseInt(request.query.fromDate);
+  let fromDate = (isNaN(dateParam) || dateParam < 0 || dateParam > 10000000000000) ? Date.now() : parseInt(request.query.fromDate);
+  const houses = [];
+
+  for (let i = 0; i < num; i++) {
+
+    fromDate = fromDate - Math.floor(1000*60*60*24*Math.random() * (i+1));
+
+    houses.push({
       type: getRandomElement(['HOUSE', 'TOWNHOUSE', 'APPARTMENT', 'ROOM']),
-      square: faker.finance.amount(),
-      price: faker.commerce.price(),
+      square: Math.floor(faker.finance.amount()) * 10,
+      price: Math.floor(faker.commerce.price()) * 100000,
+      currency: '$',
       furnishType: getRandomElement(['ELITE', 'EURO', 'REGULAR', 'NOTHING']),
       exampleImages: [
         faker.image.city()
-      ]
+      ],
+      date: new Date(fromDate)
     });
+  }
+
+  response.json({
+    lastDate: fromDate,
+    houses: houses
+  });
 });
 
 app.listen(port, (err) => {
-    if (err) {
-        return console.log('Something went wrong', err);
-    }
-    console.log(`Server is listening on ${port}`);
+  if (err) {
+    return console.log('Something went wrong', err);
+  }
+  console.log(`Server is listening on ${port}`);
 })
 
 function getRandomInt (min, max) {
