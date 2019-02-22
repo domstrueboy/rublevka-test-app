@@ -22,8 +22,9 @@ app.get('/api', (request, response, next) => {
     fromDate = fromDate - Math.floor(1000*60*60*24*Math.random() * (i+1));
 
     houses.push({
+      id: faker.random.uuid(),
       type: getRandomElement(['HOUSE', 'TOWNHOUSE', 'APPARTMENT', 'ROOM']),
-      square: Math.floor(faker.finance.amount()) * 10,
+      square: Math.floor(faker.finance.amount()),
       price: Math.floor(faker.commerce.price()) * 100000,
       currency: '$',
       furnishType: getRandomElement(['ELITE', 'EURO', 'REGULAR', 'NOTHING']),
@@ -35,6 +36,7 @@ app.get('/api', (request, response, next) => {
   }
 
   response.json({
+    total: houses.length,
     lastDate: fromDate,
     houses: houses
   });
