@@ -18,9 +18,9 @@ class Rent extends Component {
     axios.get('http://localhost:5000/api?num=10')
     .then(response => {
       this.setState({
-        rents: response.data.houses
+        rents: [...this.state.rents, ...response.data.houses]
       });
-      console.log(this.state.rents);
+      console.log(response.data);
     })
     .catch(error => {
       console.log('Error fetching and parsing data', error);

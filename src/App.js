@@ -6,6 +6,12 @@ import Sale from './Routes/Sale/Sale';
 import Rent from './Routes/Rent/Rent';
 
 class App extends Component {
+
+  state = {
+    sales: {},
+    rents: {}
+  }
+
   render() {
     return (
       <Router>
