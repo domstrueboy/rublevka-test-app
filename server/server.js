@@ -29,7 +29,7 @@ app.get('/api', (request, response, next) => {
       currency: '$',
       furnishType: getRandomElement(['ELITE', 'EURO', 'REGULAR', 'NOTHING']),
       exampleImages: [
-        faker.image.city()
+        `https://loremflickr.com/320/240/house,${i}`
       ],
       date: new Date(fromDate)
     });

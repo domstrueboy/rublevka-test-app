@@ -12,7 +12,14 @@ class Page extends Component {
       return (
         <div>
           <h3>{this.props.match.params.page}</h3>
-          <h3>{this.props.list[0].id}</h3>
+          {this.props.pageData.map(card => {
+            return (
+              <p key={card.id}>
+                <img src={card.exampleImages[0]} alt="myHouse"/>
+              </p>
+            );
+            
+          })}
         </div>
       );
     } catch (err) {
