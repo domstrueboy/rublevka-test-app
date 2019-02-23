@@ -4,27 +4,39 @@ import './Rent.css';
 
 import axios from 'axios';
 
+let state = {
+  total: 0,
+  fromDate: Date.now(),
+  rents: []
+};
+
 class Rent extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      rents: []
-    };
+    this.state = state;
   }
 
   componentDidMount () {
 
-    axios.get('http://localhost:5000/api?num=10')
-    .then(response => {
-      this.setState({
-        rents: [...this.state.rents, ...response.data.houses]
+    const num = 10;
+    const url = `http://localhost:5000/api?num=${num}`;
+
+    if (this.state.rents.length === 0) {
+      axios.get(url)
+      .then(response => {
+        this.setState({
+          rents: [...this.state.rents, ...response.data.houses]
+        });
+      })
+      .catch(error => {
+        console.log('Error fetching rent data', error);
       });
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.log('Error fetching and parsing data', error);
-    });
+    }
+  }
+
+  componentWillUnmount () {
+    state = this.state;
   }
 
   render() {

@@ -6,12 +6,6 @@ import Sale from './Routes/Sale/Sale';
 import Rent from './Routes/Rent/Rent';
 
 class App extends Component {
-
-  state = {
-    sales: {},
-    rents: {}
-  }
-
   render() {
     return (
       <Router>
@@ -36,7 +30,7 @@ class App extends Component {
 
           <Route exact path="/" render={() => <Redirect to="/sale" />} />
           <Route path="/sale" component={Sale} />
-          <Route path="/rent" component={Rent} />
+          <Route path="/rent" component={Rent} something="foo" />
         </div>
       </Router>
     );
