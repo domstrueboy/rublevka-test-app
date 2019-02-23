@@ -44,13 +44,15 @@ class Rent extends Component {
     state = this.state;
   }
 
-  render() {
+  render () {
     return (
       <Router>
         <main className="content">
           <h2>Rent</h2>
 
-          <Route path={`${this.props.match.url}/:page`} component={Page} />
+          <Route
+            path={`${this.props.match.url}/:page`}
+            component={(props) => <Page {...props} list={this.state.rents} />} />
           <Route exact path={this.props.match.url} render={() => <Redirect to={`${this.props.match.url}/1`} />} />
 
           <h3>Pages</h3>
