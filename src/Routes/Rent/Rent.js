@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './Rent.css';
 
 import axios from 'axios';
@@ -7,7 +7,8 @@ import axios from 'axios';
 let state = {
   total: 0,
   fromDate: Date.now(),
-  rents: []
+  rents: [],
+  filters: []
 };
 
 class Rent extends Component {
@@ -26,7 +27,9 @@ class Rent extends Component {
       axios.get(url)
       .then(response => {
         this.setState({
-          rents: [...this.state.rents, ...response.data.houses]
+          total: response.data.total,
+          fromDate: response.data.from,
+          rents: response.data.houses
         });
       })
       .catch(error => {
@@ -41,33 +44,36 @@ class Rent extends Component {
 
   render() {
     return (
-      <main className="content">
-        <h2>Rent</h2>
+      <Router>
+        <main className="content">
+          <h2>Rent</h2>
 
-        <Route exact path={this.props.match.url} render={() => <Redirect to={`${this.props.match.url}/1`} />} />
-        <Route path={`${this.props.match.url}/:pageNumber`} component={Page} />
+          <Route path={`${this.props.match.url}/:page`} component={Page} />
+          <Route exact path={this.props.match.url} render={() => <Redirect to={`${this.props.match.url}/1`} />} />
 
-        <h3>Pages</h3>
-        <ul>
-          <li>
-            <Link to={`${this.props.match.url}/1`}>1</Link>
-          </li>
-          <li>
-            <Link to={`${this.props.match.url}/2`}>2</Link>
-          </li>
-          <li>
-            <Link to={`${this.props.match.url}/3`}>3</Link>
-          </li>
-        </ul>
-      </main>
+          <h3>Pages</h3>
+          <ul>
+            <li>
+              <Link to={`${this.props.match.url}/1`}>1</Link>
+            </li>
+            <li>
+              <Link to={`${this.props.match.url}/2`}>2</Link>
+            </li>
+            <li>
+              <Link to={`${this.props.match.url}/3`}>3</Link>
+            </li>
+          </ul>
+        </main>
+      </Router>
+      
     );
   }
 }
 
-export default Rent;
-  
 const Page = ({ match }) => (
   <div>
-    <h3>{match.params.pageNumber}</h3>
+    <h3>{match.params.page}</h3>
   </div>
 );
+
+export default Rent;
