@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './Page.css';
 
+import Card from '../Card/Card.jsx';
+
 class Page extends Component {
 
   componentDidMount () {
@@ -14,9 +16,7 @@ class Page extends Component {
           <h3>{this.props.match.params.page}</h3>
           {this.props.pageData.map(card => {
             return (
-              <p key={card.id}>
-                <img src={card.exampleImages[0]} alt="myHouse"/>
-              </p>
+              <Card card={card} key={card.id} />
             );
             
           })}
