@@ -4,6 +4,8 @@ import './Rent.css';
 
 import axios from 'axios';
 
+import Page from '../../Components/Page/Page';
+
 let state = {
   total: 0,
   fromDate: Date.now(),
@@ -69,11 +71,5 @@ class Rent extends Component {
     );
   }
 }
-
-const Page = ({ match }) => (
-  <div>
-    <h3>{match.params.page}</h3>
-  </div>
-);
 
 export default Rent;
