@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import './Rent.css';
 
 import axios from 'axios';
 
+import Paginator from '../../Components/Paginator/Paginator.jsx';
 import Page from '../../Components/Page/Page.jsx';
 
 let state = {
@@ -55,20 +56,7 @@ class Rent extends Component {
         <main className="content">
           <h2>Rent</h2>
 
-          <ul>
-            {
-              [...Array(numberOfPages).keys()].map(i => {
-                const page = i + 1;
-                return (
-                  <li key={`rent-page-${page}`}>
-                    <Link to={`${this.props.match.url}/${page}`}>
-                      {page}
-                    </Link>
-                  </li>
-                );
-              })
-            }
-          </ul>
+          <Paginator numberOfPages={numberOfPages} url={this.props.match.url}/>
 
           <Route
             path={`${this.props.match.url}/:page`}
@@ -77,7 +65,7 @@ class Rent extends Component {
               const pageNumber = props.match.params.page;
               const offset = (pageNumber - 1) * itemsPerPage;
               const page = this.state.rents.slice(offset, offset + itemsPerPage);
-              
+
               return (<Page {...props} pageData={page} />)
             }}
           />
