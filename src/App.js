@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
 import './App.css';
 
 import Sale from './Routes/Sale/Sale.jsx';
@@ -15,11 +15,11 @@ class App extends Component {
               <ul className="nav__list">
 
                 <li className="nav__item">
-                  <Link to="/sale">SALE</Link>
+                  <NavLink to="/sale">SALE</NavLink>
                 </li>
 
                 <li className="nav__item">
-                  <Link to="/rent">RENT</Link>
+                  <NavLink to="/rent">RENT</NavLink>
                 </li>
 
               </ul>

@@ -1,0 +1,42 @@
+.filter-from-to {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.filter-from-to:first-child {
+  margin-top: 15px;
+}
+
+.filter-from-to:nth-child(2) {
+  margin-bottom: 15px;
+}
+
+.filter-from-to__input {
+  display: block;
+  box-sizing: border-box;
+  padding: 5px 15px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  border: 0;
+  border-radius: 15px;
+  background: lightgray;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+}
+
+.filter-from-to__input:focus {
+  outline: none;
+}
+
+.filter-from-to__dash {
+  display: block;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 30px;
+  text-align: center;
+}

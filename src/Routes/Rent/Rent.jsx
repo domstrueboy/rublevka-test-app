@@ -7,7 +7,10 @@ import axios from 'axios';
 import Paginator from '../../Components/Paginator/Paginator.jsx';
 import Page from '../../Components/Page/Page.jsx';
 
+import FilterFromTo from '../../Components/FilterFromTo/FilterFromTo';
 import FilterCheckbox from '../../Components/FilterCheckbox/FilterCheckbox';
+import filterByPrices from '../../Functions/filterByPrices';
+import filterBySquares from '../../Functions/filterBySquares';
 import filterByTypes from '../../Functions/filterByTypes';
 import filterByFurnishTypes from '../../Functions/filterByFurnishTypes';
 
@@ -17,6 +20,14 @@ let state = {
   rents: [],
   filtered: [],
   filters: {
+    price: {
+      from: 0,
+      to: 0
+    },
+    square: {
+      from: 0,
+      to: 0
+    },
     type: {
       HOUSE: false,
       TOWNHOUSE: false,
@@ -36,9 +47,41 @@ class Rent extends Component {
 
   constructor(props) {
     super(props);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
+    this.handleSquareChange = this.handleSquareChange.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleFurnishTypeChange = this.handleFurnishTypeChange.bind(this);
     this.state = state;
+  }
+
+  handlePriceChange (e) {
+
+    const state = {...this.state};
+    if (e.target.name === 'input1') {
+      state.filters.price.from = e.target.value;
+    } else if (e.target.name === 'input2') {
+      state.filters.price.to = e.target.value;
+    };
+    this.setState({state});
+
+    this.setState({
+      filtered: filterByPrices(this.state.rents, this.state.filters.price.from, this.state.filters.price.to)
+    });
+  }
+
+  handleSquareChange (e) {
+
+    const state = {...this.state};
+    if (e.target.name === 'input1') {
+      state.filters.square.from = e.target.value;
+    } else if (e.target.name === 'input2') {
+      state.filters.square.to = e.target.value;
+    };
+    this.setState({state});
+
+    this.setState({
+      filtered: filterBySquares(this.state.rents, this.state.filters.square.from, this.state.filters.square.to)
+    });
   }
 
   handleTypeChange (e) {
@@ -99,14 +142,21 @@ class Rent extends Component {
         <main className="content">
           <section className="filters">
 
-            <div className="filter-from-to">
-              <label>
-                <input type="text"/>
-              </label>
-              <label>
-                <input type="text"/>
-              </label>
-            </div>
+            <FilterFromTo
+              from={this.state.filters.price.from}
+              placeholderFrom="from price"
+              to={this.state.filters.price.to}
+              placeholderTo="to price"
+              onFilterChange={this.handlePriceChange}
+            />
+
+            <FilterFromTo
+              from={this.state.filters.square.from}
+              placeholderFrom="from square"
+              to={this.state.filters.square.to}
+              placeholderTo="to square"
+              onFilterChange={this.handleSquareChange}
+            />
 
             <FilterCheckbox
               cases={Object.keys(this.state.filters.type)}
