@@ -11,22 +11,33 @@ class App extends Component {
       <Router>
         <div className="app">
           <header className="header">
+
+            <div className="logo">RUBLEVKA</div>
+            
             <nav className="nav">
               <ul className="nav__list">
 
                 <li className="nav__item">
-                  <NavLink to="/sale">SALE</NavLink>
+                  <NavLink
+                    to="/sale"
+                    className="nav__link"
+                  >
+                    SALE
+                  </NavLink>
                 </li>
 
                 <li className="nav__item">
-                  <NavLink to="/rent">RENT</NavLink>
+                  <NavLink
+                    to="/rent"
+                    className="nav__link"
+                  >
+                    RENT
+                  </NavLink>
                 </li>
 
               </ul>
             </nav>
           </header>
-          
-          <hr />
 
           <Route exact path="/" render={() => <Redirect to="/sale" />} />
           <Route path="/sale" component={Sale} />
