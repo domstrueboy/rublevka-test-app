@@ -46,11 +46,16 @@ let state = {
 class Rent extends Component {
 
   constructor(props) {
+
     super(props);
+
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleSquareChange = this.handleSquareChange.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleFurnishTypeChange = this.handleFurnishTypeChange.bind(this);
+
+    this.handleAnyChange = this.handleAnyChange.bind(this);
+
     this.state = state;
   }
 
@@ -63,10 +68,7 @@ class Rent extends Component {
       state.filters.price.to = e.target.value;
     };
     this.setState({state});
-
-    this.setState({
-      filtered: filterByPrices(this.state.rents, this.state.filters.price.from, this.state.filters.price.to)
-    });
+    this.handleAnyChange();
   }
 
   handleSquareChange (e) {
@@ -78,10 +80,7 @@ class Rent extends Component {
       state.filters.square.to = e.target.value;
     };
     this.setState({state});
-
-    this.setState({
-      filtered: filterBySquares(this.state.rents, this.state.filters.square.from, this.state.filters.square.to)
-    });
+    this.handleAnyChange();
   }
 
   handleTypeChange (e) {
@@ -89,10 +88,7 @@ class Rent extends Component {
     const state = {...this.state};
     state.filters.type[e.target.name] = e.target.checked;
     this.setState({state});
-
-    this.setState({
-      filtered: filterByTypes(this.state.rents, this.state.filters.type)
-    });
+    this.handleAnyChange();
   }
 
   handleFurnishTypeChange (e) {
@@ -100,9 +96,20 @@ class Rent extends Component {
     const state = {...this.state};
     state.filters.furnishType[e.target.name] = e.target.checked;
     this.setState({state});
+    this.handleAnyChange();
+  }
+
+  handleAnyChange () {
+
+    let filtered = this.state.rents;
+
+    filtered = filterByPrices(filtered, this.state.filters.price.from, this.state.filters.price.to);
+    filtered = filterBySquares(filtered, this.state.filters.square.from, this.state.filters.square.to);
+    filtered = filterByTypes(filtered, this.state.filters.type);
+    filtered = filterByFurnishTypes(filtered, this.state.filters.furnishType);
 
     this.setState({
-      filtered: filterByFurnishTypes(this.state.rents, this.state.filters.furnishType)
+      filtered: filtered
     });
   }
 
@@ -159,12 +166,12 @@ class Rent extends Component {
             />
 
             <FilterCheckbox
-              cases={Object.keys(this.state.filters.type)}
+              filters={this.state.filters.type}
               onFilterChange={this.handleTypeChange}
             />
 
             <FilterCheckbox
-              cases={Object.keys(this.state.filters.furnishType)}
+              filters={this.state.filters.furnishType}
               onFilterChange={this.handleFurnishTypeChange}
             />
           </section>

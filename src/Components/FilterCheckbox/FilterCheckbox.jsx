@@ -5,20 +5,21 @@ const FilterCheckbox = (props) => {
   return (
     <div className="filter-checkbox">
       {
-        props.cases
+        Object.entries(props.filters)
           .map(filter => (
             <div
-              key={filter}
+              key={filter[0]}
               className="checkbox"
             >
               <input
-                id={filter}
+                id={filter[0]}
                 type="checkbox"
-                name={filter}
+                name={filter[0]}
                 onChange={props.onFilterChange}
                 className="checkbox__input"
+                checked={filter[1]}
               />
-              <label htmlFor={filter}
+              <label htmlFor={filter[0]}
                 className="checkbox__label"
               >
                 {filter}
