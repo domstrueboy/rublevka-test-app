@@ -1,0 +1,47 @@
+.card {
+    margin-right: 10px;
+    margin-bottom: 30px;
+    background: white;
+    padding: 5px;
+}
+
+.card__images {
+    display: flex;
+}
+
+.card__image {
+
+}
+
+.card__tags {
+    display: flex;
+    padding: 10px 0;
+}
+
+.card__tag {
+    box-sizing: border-box;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 10px;
+    border-radius: 15px;
+    padding: 0 15px;
+    color: white;
+    background: tomato;
+
+}
+
+.card__price {
+    display: block;
+    font-weight: bold;
+}
+
+.card__square {
+    display: block;
+}
+
+.card__posted {
+    display: block;
+    margin: 0;
+    font-size: 12px;
+    color: gray;
+}

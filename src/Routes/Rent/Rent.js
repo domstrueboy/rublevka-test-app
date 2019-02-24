@@ -4,7 +4,7 @@ import './Rent.css';
 
 import axios from 'axios';
 
-import Page from '../../Components/Page/Page';
+import Page from '../../Components/Page/Page.jsx';
 
 let state = {
   total: 0,
@@ -22,7 +22,7 @@ class Rent extends Component {
 
   componentDidMount () {
 
-    const num = 10;
+    const num = 12;
     const url = `http://localhost:5000/api?num=${num}`;
 
     if (this.state.rents.length === 0) {

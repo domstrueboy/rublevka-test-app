@@ -7,6 +7,8 @@ const Card = (props) => {
 
   const card = props.card;
 
+  card.priceFormatted = card.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
   card.ago = ago(card.date);
   
   return (
@@ -26,7 +28,7 @@ const Card = (props) => {
         <div className="card__tag">{card.type}</div>
         <div className="card__tag">{card.furnishType}</div>
       </div>
-      <p className="card__price">{`${card.currency}${card.price}`}</p>
+      <p className="card__price">{`${card.currency} ${card.priceFormatted}`}</p>
       <p className="card__square">{`${card.square} м`}<sup>2</sup></p>
       <p className="card__posted">{`${card.ago}`}</p>
     </article>

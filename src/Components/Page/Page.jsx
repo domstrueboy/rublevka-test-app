@@ -12,8 +12,7 @@ class Page extends Component {
   render () {
     try {
       return (
-        <div>
-          <h3>{this.props.match.params.page}</h3>
+        <div className="page">
           {this.props.pageData.map(card => {
             return (
               <Card card={card} key={card.id} />
