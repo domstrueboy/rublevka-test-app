@@ -8,7 +8,8 @@ import Paginator from '../../Components/Paginator/Paginator.jsx';
 import Page from '../../Components/Page/Page.jsx';
 
 import FilterCheckbox from '../../Components/FilterCheckbox/FilterCheckbox';
-import filterByTypes from '../../Functions/filterByTypes'
+import filterByTypes from '../../Functions/filterByTypes';
+import filterByFurnishTypes from '../../Functions/filterByFurnishTypes';
 
 let state = {
   total: 0,
@@ -21,6 +22,12 @@ let state = {
       TOWNHOUSE: false,
       APPARTMENT: false,
       ROOM: false
+    },
+    furnishType: {
+      ELITE: false,
+      EURO: false,
+      REGULAR: false,
+      NOTHING: false
     }
   }
 };
@@ -30,6 +37,7 @@ class Rent extends Component {
   constructor(props) {
     super(props);
     this.handleTypeChange = this.handleTypeChange.bind(this);
+    this.handleFurnishTypeChange = this.handleFurnishTypeChange.bind(this);
     this.state = state;
   }
 
@@ -41,6 +49,17 @@ class Rent extends Component {
 
     this.setState({
       filtered: filterByTypes(this.state.rents, this.state.filters.type)
+    });
+  }
+
+  handleFurnishTypeChange (e) {
+
+    const state = {...this.state};
+    state.filters.furnishType[e.target.name] = e.target.checked;
+    this.setState({state});
+
+    this.setState({
+      filtered: filterByFurnishTypes(this.state.rents, this.state.filters.furnishType)
     });
   }
 
@@ -79,20 +98,24 @@ class Rent extends Component {
       <Router>
         <main className="content">
           <section className="filters">
-            <h2>Filters:</h2>
 
-            <div className="filter-range">
+            <div className="filter-from-to">
               <label>
-                <input type="range"/>
+                <input type="text"/>
               </label>
               <label>
-                <input type="range"/>
+                <input type="text"/>
               </label>
             </div>
 
             <FilterCheckbox
               cases={Object.keys(this.state.filters.type)}
               onFilterChange={this.handleTypeChange}
+            />
+
+            <FilterCheckbox
+              cases={Object.keys(this.state.filters.furnishType)}
+              onFilterChange={this.handleFurnishTypeChange}
             />
           </section>
 
