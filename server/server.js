@@ -17,6 +17,8 @@ app.get('/api', (request, response, next) => {
   let fromDate = (isNaN(dateParam) || dateParam < 0 || dateParam > 10000000000000) ? Date.now() : parseInt(request.query.fromDate);
   const houses = [];
 
+  const random = Math.floor(Math.random()*10);
+
   for (let i = 0; i < num; i++) {
 
     fromDate = fromDate - Math.floor(1000*60*60*24*Math.random() * (i+1));
@@ -29,7 +31,7 @@ app.get('/api', (request, response, next) => {
       currency: '$',
       furnishType: getRandomElement(['ELITE', 'EURO', 'REGULAR', 'NOTHING']),
       exampleImages: [
-        `https://loremflickr.com/320/240/house,${i}`
+        `https://loremflickr.com/320/240/house,${i + random}`
       ],
       date: new Date(fromDate)
     });
