@@ -25,7 +25,7 @@ app.get('/api', (request, response, next) => {
       id: faker.random.uuid(),
       type: getRandomElement(['HOUSE', 'TOWNHOUSE', 'APPARTMENT', 'ROOM']),
       square: Math.floor(faker.finance.amount()),
-      price: Math.floor(faker.commerce.price()) * 100000,
+      price: Math.floor(faker.commerce.price()) * 10000,
       currency: '$',
       furnishType: getRandomElement(['ELITE', 'EURO', 'REGULAR', 'NOTHING']),
       exampleImages: [

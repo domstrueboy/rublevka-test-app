@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
 
-import Sale from './Routes/Sale/Sale';
-import Rent from './Routes/Rent/Rent';
+import Sale from './Routes/Sale/Sale.jsx';
+import Rent from './Routes/Rent/Rent.jsx';
 
 class App extends Component {
   render() {
