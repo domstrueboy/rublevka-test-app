@@ -1,0 +1,36 @@
+.paginator {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+
+.paginator__item {
+    display: block;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+}
+
+.paginator__item:not(:last-child) {
+    margin-right: 10px;
+}
+
+.paginator__link {
+    display: block;
+    padding: 10px;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    background: tomato;
+}
+
+.paginator__link:visited {
+    color: white;
+}
+
+.paginator__link.active {
+    background: black;
+}
