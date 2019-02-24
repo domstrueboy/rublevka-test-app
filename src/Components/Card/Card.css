@@ -11,6 +11,9 @@
 
 .card__image {
   border-radius: 5px;
+  width: 320px;
+  height: 240px;
+  background: lightgray;
 }
 
 .card__tags {

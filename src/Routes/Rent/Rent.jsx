@@ -22,8 +22,8 @@ class Rent extends Component {
 
   componentDidMount () {
 
-    const num = 12;
-    const url = `http://localhost:5000/api?num=${num}`;
+    const num = 120,
+          url = `http://localhost:5000/api?num=${num}`;
 
     if (this.state.rents.length === 0) {
       axios.get(url)
@@ -45,31 +45,45 @@ class Rent extends Component {
   }
 
   render () {
+
+    const total = this.state.total;
+    const itemsPerPage = 12;
+    const numberOfPages = Math.ceil(total / itemsPerPage);
+
     return (
       <Router>
         <main className="content">
           <h2>Rent</h2>
 
+          <ul>
+            {
+              [...Array(numberOfPages).keys()].map(i => {
+                const page = i + 1;
+                return (
+                  <li key={`rent-page-${page}`}>
+                    <Link to={`${this.props.match.url}/${page}`}>
+                      {page}
+                    </Link>
+                  </li>
+                );
+              })
+            }
+          </ul>
+
           <Route
             path={`${this.props.match.url}/:page`}
-            component={(props) => <Page {...props} pageData={this.state.rents} />} />
-          <Route exact path={this.props.match.url} render={() => <Redirect to={`${this.props.match.url}/1`} />} />
+            component={(props) => {
 
-          <h3>Pages</h3>
-          <ul>
-            <li>
-              <Link to={`${this.props.match.url}/1`}>1</Link>
-            </li>
-            <li>
-              <Link to={`${this.props.match.url}/2`}>2</Link>
-            </li>
-            <li>
-              <Link to={`${this.props.match.url}/3`}>3</Link>
-            </li>
-          </ul>
+              const pageNumber = props.match.params.page;
+              const offset = (pageNumber - 1) * itemsPerPage;
+              const page = this.state.rents.slice(offset, offset + itemsPerPage);
+              
+              return (<Page {...props} pageData={page} />)
+            }}
+          />
+          <Route exact path={this.props.match.url} render={() => <Redirect to={`${this.props.match.url}/1`} />} />
         </main>
       </Router>
-      
     );
   }
 }
