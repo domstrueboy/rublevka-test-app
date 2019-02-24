@@ -1,12 +1,10 @@
 import React from 'react';
 import './Paginator.css';
 
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, NavLink, withRouter } from 'react-router-dom';
 
 const Paginator = (props) => {
-  console.log(props);
   return (
-    <Router>
       <ul className="paginator">
         {
           [...Array(props.numberOfPages).keys()]
@@ -17,19 +15,18 @@ const Paginator = (props) => {
                     key={`rent-page-${page}`}
                     className="paginator__item"
                   >
-                    <Link
+                    <NavLink
                       to={`${props.url}/${page}`}
                       className="paginator__link"
                     >
                       {page}
-                    </Link>
+                    </NavLink>
                   </li>
                 );
             })
         }
       </ul>
-    </Router>
   );
 }
 
-export default Paginator;
+export default withRouter(Paginator);
