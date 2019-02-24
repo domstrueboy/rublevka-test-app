@@ -92,7 +92,7 @@ class Rent extends Component {
 
             <FilterCheckbox
               cases={Object.keys(this.state.filters.type)}
-              onTypeChange={this.handleTypeChange}
+              onFilterChange={this.handleTypeChange}
             />
           </section>
 

@@ -7,14 +7,23 @@ const FilterCheckbox = (props) => {
       {
         props.cases
           .map(filter => (
-            <label key={filter}>
+            <div
+              key={filter}
+              className="checkbox"
+            >
               <input
+                id={filter}
                 type="checkbox"
                 name={filter}
-                onChange={props.onTypeChange}
+                onChange={props.onFilterChange}
+                className="checkbox__input"
               />
+              <label htmlFor={filter}
+                className="checkbox__label"
+              >
                 {filter}
-            </label>
+              </label>
+            </div>
           ))
       }
     </div>

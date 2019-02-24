@@ -1,0 +1,29 @@
+.filter-checkbox {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.checkbox__input {
+  display: none;
+}
+
+.checkbox__input:checked + .checkbox__label {
+  background: tomato;
+}
+
+.checkbox__label {
+  display: block;
+  box-sizing: border-box;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 15px;
+  margin-right: 5px;
+  border-radius: 15px;
+  color: white;
+  background: lightgray;
+}
+
+.checkbox__label:hover {
+  background: brown;
+}
